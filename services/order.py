@@ -10,10 +10,9 @@ def create_order(tickets: list[dict],
     user = User.objects.get(username=username)
 
     with transaction.atomic():
-        if date is None:
-            order = Order.objects.create(user=user)
-        else:
-            order = Order.objects.create(user=user, created_at=date)
+        order = Order.objects.create(user=user)
+        if date is not None:
+            Order.objects.filter(id=order.id).update(created_at=date)
         for ticket in tickets:
             Ticket.objects.create(movie_session=MovieSession.
                                   objects.get(id=ticket["movie_session"]),
