@@ -33,13 +33,13 @@ def create_movie(
     actors_ids: list = None,
 ) -> Movie:
     with transaction.atomic():
-        movie = Movie.objects.create(
+        film = Movie.objects.create(
             title=movie_title,
             description=movie_description,
         )
         if genres_ids:
-            movie.genres.set(genres_ids)
+            film.genres.set(genres_ids)
         if actors_ids:
-            movie.actors.set(actors_ids)
+            film.actors.set(actors_ids)
 
-        return movie
+        return film
