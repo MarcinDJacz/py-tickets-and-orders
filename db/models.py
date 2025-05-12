@@ -5,6 +5,12 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 
+class User(AbstractUser):
+    first_name = models.CharField(max_length=150, blank=True, default="")
+    last_name = models.CharField(max_length=150, blank=True, default="")
+    email = models.EmailField(blank=True, default="")
+
+
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -110,9 +116,3 @@ class Ticket(models.Model):
     def __str__(self) -> str:
         return (f"{self.movie_session}"
                 f" (row: {self.row}, seat: {self.seat})")
-
-
-class User(AbstractUser):
-    first_name = models.CharField(max_length=150, blank=True, default="")
-    last_name = models.CharField(max_length=150, blank=True, default="")
-    email = models.EmailField(blank=True, default="")
